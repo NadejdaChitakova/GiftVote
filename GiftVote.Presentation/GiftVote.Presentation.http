@@ -1,0 +1,6 @@
+@GiftVote.Presentation_HostAddress = http://localhost:5057
+
+GET {{GiftVote.Presentation_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
