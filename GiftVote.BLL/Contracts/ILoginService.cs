@@ -5,5 +5,5 @@ namespace GiftVote.BLL.Contracts;
 
 public interface ILoginService
 {
-    Task<Result<bool>> LoginAsync(LoginRequest request);
+    Task<Result<string>> LoginAsync(LoginRequest request);
 }

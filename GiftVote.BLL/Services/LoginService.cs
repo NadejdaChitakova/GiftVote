@@ -1,4 +1,5 @@
 ﻿using GiftVote.BLL.Contracts;
+using GiftVote.BLL.Models;
 using GiftVote.BLL.Models.Abstractions;
 using GiftVote.BLL.Models.Request;
 using GiftVote.Data.Repositories.Contracts;
@@ -6,13 +7,21 @@ using GiftVote.Data.Repositories.Contracts;
 namespace GiftVote.BLL.Services;
 
 public class LoginService(
-    IEmployeeRepository employeeRepository)
-    :ILoginService
+    IEmployeeRepository employeeRepository,
+    IJwtProvider jwtProvider)
+    : ILoginService
 {
-    public async Task<Result<bool>> LoginAsync(LoginRequest request)
+    public async Task<Result<string>> LoginAsync(LoginRequest request)
     {
-        var isEmployeeExists = await employeeRepository.CheckUserExistsByCredentialsAsync(request.username, request.password);
+        var employee = await employeeRepository.GetEmployeeByCredentials(request.username, request.password);
 
-        return isEmployeeExists;
+        if (employee is not null)
+        {
+            return Result.Failure<string>(EmployeeErrors.InvalidCredentials);
+        }
+
+        string token = jwtProvider.Generate(employee);
+
+        return token;
     }
 }

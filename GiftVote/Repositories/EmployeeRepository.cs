@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GiftVote.Data.Repositories
 {
-    internal sealed class EmployeeRepository(IdentityDbContext context) :IEmployeeRepository
+    internal sealed class EmployeeRepository(IdentityDbContext context) : IEmployeeRepository
     {
         public async Task<Employee?> FindByIdAsync(int id, CancellationToken cancellationToken = default)
         {
@@ -15,11 +15,12 @@ namespace GiftVote.Data.Repositories
                        .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
 
-        public async Task<bool> CheckUserExistsByCredentialsAsync(string username, string password, CancellationToken cancellationToken = default)
+        public async Task<Employee?> GetEmployeeByCredentials(string username, string password,
+            CancellationToken cancellationToken)
         {
             return await context
                        .Set<Employee>()
-                       .AnyAsync(x => x.UserName == username && x.Password == password, cancellationToken);
+                       .FirstOrDefaultAsync(x => x.UserName == username && x.Password == password, cancellationToken);
         }
     }
 }
