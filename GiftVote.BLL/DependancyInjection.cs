@@ -1,6 +1,6 @@
 ﻿namespace GiftVote.BLL
 {
-    public class Class1
+    public class DependancyInjection
     {
 
     }
