@@ -11,11 +11,11 @@ public class LoginService(
     IJwtProvider jwtProvider)
     : ILoginService
 {
-    public async Task<Result<string>> LoginAsync(LoginRequest request)
+    public async Task<Result<string>> LoginAsync(LoginRequest request, CancellationToken cancellationToken)
     {
-        var employee = await employeeRepository.GetEmployeeByCredentials(request.username, request.password);
+        var employee = await employeeRepository.GetEmployeeByCredentials(request.username, request.password, cancellationToken);
 
-        if (employee is not null)
+        if (employee is null)
         {
             return Result.Failure<string>(EmployeeErrors.InvalidCredentials);
         }

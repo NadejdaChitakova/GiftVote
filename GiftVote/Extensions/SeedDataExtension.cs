@@ -10,24 +10,31 @@ namespace GiftVote.Data.Extensions
         public static void SeedData(this IApplicationBuilder app)
         {
             var faker = new Faker();
-            using var context = new IdentityDbContext();
-            List<Gifts> gifts =
-            [
-                GiftFactory("Chocolate"),
-                GiftFactory("Parfume"),
-                GiftFactory("Jewel")
-            ];
+            using (var context = new IdentityDbContext())
+            {
+                List<Gifts> gifts =
+                [
+                    GiftFactory("Chocolate"),
+                    GiftFactory("Parfume"),
+                    GiftFactory("Jewel")
+                ];
 
-            List<Employee> employees = 
-            [
-                EmployeeFactory(faker.Person.FirstName, faker.Person.LastName, faker.Person.UserName),
-                EmployeeFactory(faker.Person.FirstName, faker.Person.LastName, faker.Person.UserName),
-                EmployeeFactory(faker.Person.FirstName, faker.Person.LastName, faker.Person.UserName),
-                EmployeeFactory(faker.Person.FirstName, faker.Person.LastName, faker.Person.UserName)
-                                       ];
-            context.Set<Gifts>()
-                .AddRange(gifts);
+                List<Employee> employees =
+                [
+                    EmployeeFactory(faker.Person.FirstName, faker.Person.LastName, faker.Person.UserName),
+                    EmployeeFactory(faker.Person.FirstName, faker.Person.LastName, faker.Person.UserName),
+                    EmployeeFactory(faker.Person.FirstName, faker.Person.LastName, faker.Person.UserName),
+                    EmployeeFactory(faker.Person.FirstName, faker.Person.LastName, faker.Person.UserName)
+                ];
 
+                context.Set<Gifts>()
+                    .AddRange(gifts);
+
+                context.Set<Employee>()
+                    .AddRange(employees);
+
+                context.SaveChanges();
+            }
         }
 
         private static Gifts GiftFactory(string name)

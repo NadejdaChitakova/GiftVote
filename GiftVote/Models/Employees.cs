@@ -1,4 +1,6 @@
-﻿namespace GiftVote.Data.Models;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace GiftVote.Data.Models;
 
 public sealed class Employee 
 {
@@ -7,6 +9,9 @@ public sealed class Employee
     public string FirstName { get; set; }
 
     public string LastName { get; set; }
+
+    [NotMapped]
+    public string FullName => FirstName + " " + LastName;
 
     public string UserName {  get; set; }
 

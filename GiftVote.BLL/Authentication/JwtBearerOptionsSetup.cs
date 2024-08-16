@@ -19,8 +19,7 @@ namespace GiftVote.BLL.Authentication
                 ValidateIssuerSigningKey = true,
                 ValidIssuer = _options.Issuer,
                 ValidAudience = _options.Audience,
-                IssuerSigningKey = new SymmetricSecurityKey(
-                                                            Encoding.UTF8.GetBytes(_options.SecretKey))
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.SecretKey))
             };
         }
 

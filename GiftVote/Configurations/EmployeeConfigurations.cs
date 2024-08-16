@@ -23,7 +23,7 @@ namespace GiftVote.Data.Configurations
 
             builder.Property(x => x.Password)
                 .IsRequired()
-                .HasMaxLength(30);
+                .HasMaxLength(100);
         }
     }
 }

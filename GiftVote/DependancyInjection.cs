@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace GiftVote.Data
 {
-    internal static class DependancyInjection
+    public static class DependancyInjection
     {
         public static IServiceCollection AddPersistance(this IServiceCollection services,
             IConfiguration configuration)

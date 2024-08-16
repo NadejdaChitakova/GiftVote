@@ -1,10 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace GiftVote.Data.Context
 {
     public class IdentityDbContext : DbContext
     {
-        public IdentityDbContext(DbContextOptions options): base(options) { }
+        private readonly IConfiguration _configuration;
+
+        public IdentityDbContext(DbContextOptions options,
+            IConfiguration configuration) : base(options)
+        {
+            _configuration = configuration;
+        }
 
         public IdentityDbContext() { }
 
@@ -17,6 +24,8 @@ namespace GiftVote.Data.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+
+            string? schema = _configuration["Database"];
             optionsBuilder.UseSqlServer("Server=localhost,1433;Database=giftVote; user id=sa; password=Na!12345678;  TrustServerCertificate=True;");
         }
     }

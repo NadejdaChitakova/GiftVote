@@ -5,11 +5,20 @@ namespace GiftVote.BLL.Models
     public static class EmployeeErrors
     {
         public static Error NotFound = new(
-                                           "User.Found",
-                                           "The user with the specified identifier was not found");
+                                           "Employee.Found",
+                                           "The employee with the specified identifier was not found");
 
         public static Error InvalidCredentials = new(
-                                                     "User.InvalidCredentials",
+                                                     "Employee.InvalidCredentials",
                                                      "The provided credentials were invalid");
+
+        public static Error BallotForHimself = new(
+                                             "Employee.Ballot",
+                                             "The employee cannot initiate ballot for himself");
+
+        public static Error BallotAlreadyExistForUser = new(
+                                                            "Employee.Ballot",
+                                                            "The ballot already exist for this user");
+
     }
 }
