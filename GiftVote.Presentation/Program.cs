@@ -1,7 +1,6 @@
 using GiftVote.BLL;
 using GiftVote.BLL.Authentication;
 using GiftVote.Data;
-using GiftVote.Data.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,16 +22,13 @@ builder.Services.AddCore(builder.Configuration);
 var app = builder.Build();
 
 //app.SeedData();
-
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-
 }
 
-app.UseHttpsRedirection();
+app.UseCors("AllowMyOrigin");
 
 app.UseAuthorization();
 

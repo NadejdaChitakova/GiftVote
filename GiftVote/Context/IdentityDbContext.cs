@@ -25,8 +25,9 @@ namespace GiftVote.Data.Context
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
-            string? schema = _configuration["Database"];
-            optionsBuilder.UseSqlServer("Server=localhost,1433;Database=giftVote; user id=sa; password=Na!12345678;  TrustServerCertificate=True;");
+            string? connectionString = _configuration["ConnectionStrings:Database"];
+
+            optionsBuilder.UseSqlServer(connectionString);
         }
     }
 }

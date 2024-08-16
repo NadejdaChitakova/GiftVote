@@ -4,9 +4,9 @@ using GiftVote.Data.Models;
 
 namespace GiftVote.BLL.AutoMapper
 {
-    public class BallotMapping : Profile
+    public class BallotMapper : Profile
     {
-        public BallotMapping()
+        public BallotMapper()
         {
             int? loggedUserId = null;
 

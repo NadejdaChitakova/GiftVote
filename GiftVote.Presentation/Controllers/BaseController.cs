@@ -18,7 +18,7 @@ namespace GiftVote.Presentation.Controllers
 
                 var id = employeeService.GetEmployeeByUsername(UserName, CancellationToken.None).Result;
 
-                if (id.HasValue)
+                if (!id.HasValue)
                 {
                     throw new Exception("User not found");
                 }

@@ -19,6 +19,7 @@ namespace GiftVote.Data
             services.AddDbContext<IdentityDbContext>(options => { options.UseSqlServer(connectionString); });
 
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IBallotRepository, BallotRepository>();
 
             return services;
         }

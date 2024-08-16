@@ -38,5 +38,11 @@ namespace GiftVote.Data.Repositories
 
             return isPasswordMatch ? employee : null;
         }
+
+        public IQueryable<Employee> GetAll(int loggedUserId)
+        {
+            return context.Set<Employee>()
+                .Where(x => x.Id != loggedUserId);
+        }
     }
 }

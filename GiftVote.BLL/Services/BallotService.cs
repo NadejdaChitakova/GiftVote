@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GiftVote.BLL.Contracts;
 using GiftVote.BLL.Models;
 using GiftVote.BLL.Models.Abstractions;
 using GiftVote.BLL.Models.Request;
@@ -9,7 +10,7 @@ namespace GiftVote.BLL.Services
 {
     public sealed class BallotService(
         IBallotRepository repository,
-        IMapper mapper)
+        IMapper mapper) : IBallotService
     {
         public async Task<Result> StartBallotForUser(int id, int loggedUserId, CancellationToken cancellationToken)
         {
