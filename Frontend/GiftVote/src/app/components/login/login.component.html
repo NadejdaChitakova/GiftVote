@@ -1,0 +1,27 @@
+<div class="p-d-flex p-jc-center p-ai-center p-min-vh-100 p-bg-light">
+  <p-card class="p-shadow-3" header="Login">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="p-fluid">
+        <div class="p-field">
+          <label for="username">Username</label>
+          <input id="username" type="text" pInputText formControlName="username" />
+          <small *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched" class="p-error">
+            Username is required and must be at least 3 characters.
+          </small>
+        </div>
+
+        <div class="p-field">
+          <label for="password">Password</label>
+          <p-password id="password" formControlName="password" [feedback]="false"></p-password>
+          <small *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="p-error">
+            Password is required and must be at least 6 characters.
+          </small>
+        </div>
+
+        <div class="p-field">
+          <button pButton type="submit" label="Login" [disabled]="loginForm.invalid" class="p-mt-2"></button>
+        </div>
+      </div>
+    </form>
+  </p-card>
+</div>

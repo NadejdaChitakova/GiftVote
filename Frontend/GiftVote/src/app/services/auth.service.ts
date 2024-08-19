@@ -8,7 +8,7 @@ import { Login } from '../models/login';
 })
 export class AuthService {
 
-  url = "https://localhost:44385/api/User";
+  url = "https://localhost:44385/api/Users/Login";
 
   constructor(  private httpClient: HttpClient,
                 private router: Router) { }
@@ -17,8 +17,9 @@ export class AuthService {
 
     this.httpClient.post<any>(this.url,login).subscribe({
       next: (data) => {
-        this.setToken(data);
-        //this.router.navigate(["/"])
+        console.log(data.value)
+        this.setToken(data.value);
+        this.router.navigate(["/landingPage"])
       },
       error: (err) => {
         this.setToken(null)

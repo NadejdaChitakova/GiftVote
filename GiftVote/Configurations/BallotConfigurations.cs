@@ -13,8 +13,7 @@ namespace GiftVote.Data.Configurations
             builder.Property(x => x.StartTime)
                 .IsRequired();
 
-            builder.Property(x => x.EndTime)
-                .IsRequired();
+            builder.Property(x => x.EndTime);
 
             builder.HasOne(x => x.Creator)
                 .WithMany(x => x.CreatedBallots)

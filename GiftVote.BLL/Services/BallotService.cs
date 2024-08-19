@@ -5,11 +5,13 @@ using GiftVote.BLL.Models.Abstractions;
 using GiftVote.BLL.Models.Request;
 using GiftVote.BLL.Models.Response;
 using GiftVote.Data.Repositories.Contracts;
+using Microsoft.EntityFrameworkCore;
 
 namespace GiftVote.BLL.Services
 {
     public sealed class BallotService(
         IBallotRepository repository,
+        IVoteRepository voteRepository,
         IMapper mapper) : IBallotService
     {
         public async Task<Result> StartBallotForUser(int id, int loggedUserId, CancellationToken cancellationToken)
@@ -28,20 +30,13 @@ namespace GiftVote.BLL.Services
 
             var ballot = Data.Models.Ballot.CreateBallot(
                                                          DateTime.Now, 
-                                                         DateTime.Now,
-                                                         id,
-                                                         loggedUserId);
+                                                         null,
+                                                         loggedUserId,
+                                                         id);
 
             await repository.InsertBallot(ballot, cancellationToken);
 
             return Result.Success();
-        }
-
-        public void Vote(int id, int loggedUserId)
-        {
-            //if the voter id is different by birthday gay
-
-            // if the voter is already vote for this birthday gay
         }
 
         public async Task<Result> StopBallotForUser(StopBallotRequest request, int loggedUserId, CancellationToken cancellationToken)
@@ -56,15 +51,21 @@ namespace GiftVote.BLL.Services
   return Result.Success();
         }
 
-        public void GetBallots(int loggedUserId, CancellationToken cancellationToken)
+        public async Task<Result<List<GetAllBallots>>> GetBallots(int loggedUserId, CancellationToken cancellationToken)
         {
-            var query = repository.GetBallots(loggedUserId, cancellationToken);
+            var query = repository.GetBallots(loggedUserId);
 
             var data = mapper.ProjectTo<GetAllBallots>(query, new Dictionary<string, object> { ["loggedUserId"] = loggedUserId});
 
-            //var totalRecords = data.Count();
+            var result = await data.ToListAsync(cancellationToken);
 
-            var result = data.ToList();
+            return result;
+        }
+
+        public async Task<Result<BallotStatisticResponse>> GetBallotResult(int ballotId, CancellationToken cancellationToken)
+        {
+            var selectedGift = voteRepository.GetWinningGift(ballotId);
+
 
         }
     }

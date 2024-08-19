@@ -1,11 +1,13 @@
 ﻿using GiftVote.BLL.Contracts;
 using GiftVote.BLL.Models.Request;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GiftVote.Presentation.Controllers
 {
     [ApiController]
     [Route("api/Users")]
+    [EnableCors]
     public class LoginController(
         ILoginService loginService) : ControllerBase
     {

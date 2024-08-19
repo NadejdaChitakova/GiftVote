@@ -16,6 +16,9 @@ namespace GiftVote.BLL
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IBallotService, BallotService>();
             services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddScoped<IVoteService, VoteService>();
+            services.AddScoped<IGiftService, GiftService>();
+
             services.AddScoped<IJwtProvider, JwtProvider>();
 
             return services;

@@ -7,5 +7,11 @@
         public string Name { get; init; }
 
         public List<Vote> Votes { get; set; }
+
+        public static Gifts GiftFactory(string name)
+            => new()
+            {
+                Name = name
+            };
     }
 }

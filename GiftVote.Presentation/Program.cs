@@ -5,6 +5,17 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowMyOrigin",
+                      builder =>
+                      {
+                          builder.WithOrigins("http://localhost:4200")
+                              .AllowAnyMethod()
+                              .AllowAnyHeader();
+                      });
+});
+
 builder.Services.AddControllers();
 
 builder.Services.ConfigureOptions<JwtOptionsSetup>();

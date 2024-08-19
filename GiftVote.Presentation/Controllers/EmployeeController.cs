@@ -1,5 +1,6 @@
 ﻿using GiftVote.BLL.Contracts;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GiftVote.Presentation.Controllers
@@ -7,6 +8,7 @@ namespace GiftVote.Presentation.Controllers
     [ApiController]
     [Route("api/Employee")]
     [Authorize]
+    [EnableCors]
     public class EmployeeController(
         IEmployeeService employeeService) : BaseController(employeeService)
     {

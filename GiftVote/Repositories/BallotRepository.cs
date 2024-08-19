@@ -19,7 +19,7 @@ namespace GiftVote.Data.Repositories
 
         }
 
-        public IQueryable<Ballot> GetBallots(int userId, CancellationToken cancellationToken)
+        public IQueryable<Ballot> GetBallots(int userId)
         {
             return context.Set<Ballot>()
                 .Where(x => x.GiftReceiverId != userId);

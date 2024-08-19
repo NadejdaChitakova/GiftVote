@@ -7,7 +7,7 @@
 public Gifts Gift {  get; init; }
         public int BallotId { get; init; }
         public Ballot Ballot { get; init; }
-public int VoterId { get; init; }
+public int VoterId { get; set; }
 public Employee Voter { get; init; }
     }
 }

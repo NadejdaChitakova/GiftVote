@@ -4,6 +4,7 @@ namespace GiftVote.Data.Models;
 
 public sealed class Employee 
 {
+    public Employee() { }
     public int Id { get; set; }
 
     public string FirstName { get; set; }
@@ -22,4 +23,13 @@ public sealed class Employee
     public List<Ballot> CreatedBallots { get; set; }
 
     public List<Ballot> EmployeeBallots { get; set; }
+
+    public static Employee EmployeeFactory(string firstname, string lastname, string username)
+        => new()
+        {
+            FirstName = firstname,
+            LastName = lastname,
+            UserName = username,
+            Password = BCrypt.Net.BCrypt.HashPassword(username)
+        };
 }

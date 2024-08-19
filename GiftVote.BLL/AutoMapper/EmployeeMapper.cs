@@ -10,7 +10,7 @@ namespace GiftVote.BLL.AutoMapper
         {
             CreateMap<Employee, EmployeesResponse>()
                 .ForMember(x=> x.FullName, opt => opt.MapFrom(src => src.FullName))
-                .ForMember(x=> x.HasActualBallot, opt => opt.MapFrom(src => src.CreatedBallots.Any(y=> y.GiftReceiverId == src.Id && y.StartTime.Year == DateTime.Now.Year)));
+                .ForMember(x=> x.HasActualBallot, opt => opt.MapFrom(src => src.EmployeeBallots.Any(y=>  y.StartTime.Year == DateTime.Now.Year)));
         }
     }
 }

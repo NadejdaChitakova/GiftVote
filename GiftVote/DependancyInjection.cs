@@ -20,6 +20,8 @@ namespace GiftVote.Data
 
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IBallotRepository, BallotRepository>();
+            services.AddScoped<IVoteRepository, VoteRepository>();
+            services.AddScoped<IGiftRepository, GiftRepository>();
 
             return services;
         }

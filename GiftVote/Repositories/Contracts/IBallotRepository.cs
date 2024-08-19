@@ -6,7 +6,7 @@ public interface IBallotRepository
 {
     Task StopBallot(int ballotId, CancellationToken cancellationToken);
 
-    IQueryable<Ballot> GetBallots(int userId, CancellationToken cancellationToken);
+    IQueryable<Ballot> GetBallots(int userId);
 
     Task<bool> HasExistingBallot(int employeeId, CancellationToken cancellationToken);
 

@@ -14,17 +14,17 @@ namespace GiftVote.Data.Extensions
             {
                 List<Gifts> gifts =
                 [
-                    GiftFactory("Chocolate"),
-                    GiftFactory("Parfume"),
-                    GiftFactory("Jewel")
+                    Gifts.GiftFactory("Chocolate"),
+                    Gifts.GiftFactory("Perfume"),
+                    Gifts.GiftFactory("Jewel")
                 ];
 
                 List<Employee> employees =
                 [
-                    EmployeeFactory(faker.Person.FirstName, faker.Person.LastName, faker.Person.UserName),
-                    EmployeeFactory(faker.Person.FirstName, faker.Person.LastName, faker.Person.UserName),
-                    EmployeeFactory(faker.Person.FirstName, faker.Person.LastName, faker.Person.UserName),
-                    EmployeeFactory(faker.Person.FirstName, faker.Person.LastName, faker.Person.UserName)
+Employee.EmployeeFactory(faker.Person.FirstName, faker.Person.LastName, faker.Person.UserName),
+Employee.EmployeeFactory(faker.Person.FirstName, faker.Person.LastName, faker.Person.UserName),
+Employee.EmployeeFactory(faker.Person.FirstName, faker.Person.LastName, faker.Person.UserName),
+Employee.EmployeeFactory(faker.Person.FirstName, faker.Person.LastName, faker.Person.UserName)
                 ];
 
                 context.Set<Gifts>()
@@ -36,21 +36,6 @@ namespace GiftVote.Data.Extensions
                 context.SaveChanges();
             }
         }
-
-        private static Gifts GiftFactory(string name)
-        => new()
-{
-Name = name
-};
-
-        private static Employee EmployeeFactory(string firstname, string lastname, string username)
-            => new()
-            {
-                FirstName = firstname,
-                LastName = lastname,
-                UserName = username,
-                Password = BCrypt.Net.BCrypt.HashPassword(username)
-            };
     }
     }
 

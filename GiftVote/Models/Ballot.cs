@@ -6,7 +6,7 @@ namespace GiftVote.Data.Models
     {
         public int Id { get; set; }
         public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
+        public DateTime? EndTime { get; set; }
         public int CreatorId { get; set; }
         public Employee Creator { get; set; }
         public int GiftReceiverId { get; set; }
@@ -15,7 +15,7 @@ namespace GiftVote.Data.Models
 
         public static Ballot? CreateBallot(
         DateTime startTime,
-        DateTime endTime,
+        DateTime? endTime,
         int creatorId,
         int giftReceiverId)
         {

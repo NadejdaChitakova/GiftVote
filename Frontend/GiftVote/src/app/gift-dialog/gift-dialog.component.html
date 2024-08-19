@@ -1,0 +1,44 @@
+<div class="card flex justify-content-center">
+  <p-button (onClick)="showDialog()" label="Vote" />
+  <p-dialog
+      header="Header"
+      [(visible)]="isVisible"
+      [modal]="true"
+      [style]="{ width: '30%', height: 'auto' }">
+          <ng-template pTemplate="header">
+              <div class="inline-flex align-items-center justify-content-center gap-2">
+                  <span class="font-bold white-space-nowrap">
+                     Give vote for: {{ballot.giftReceiverName}}
+                  </span>
+              </div>
+          </ng-template>
+          <ng-template pTemplate="content">
+            <div>
+
+              <span class="p-text-secondary block mb-5">Choose birthday gift</span>
+              <div class="card flex justify-content-center">
+                <p-dropdown
+                appendTo="body"
+                [options]="gifts"
+                [(ngModel)]="selectedGift"
+                optionLabel="name"
+                placeholder="Select a gift"
+                />
+              </div>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="footer">
+              <p-button
+                  label="Cancel"
+                  [text]="true"
+                  severity="secondary"
+                  (onClick)="isVisible = false" />
+              <p-button
+                  label="Vote"
+                  [outlined]="true"
+                  severity="secondary"
+                  (onClick)="vote()"
+                />
+          </ng-template>
+  </p-dialog>
+</div>

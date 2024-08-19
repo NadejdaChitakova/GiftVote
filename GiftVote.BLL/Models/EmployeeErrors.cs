@@ -20,5 +20,13 @@ namespace GiftVote.BLL.Models
                                                             "Employee.Ballot",
                                                             "The ballot already exist for this user");
 
+        public static Error VoteForHimself = new(
+                                                   "Employee.Vote",
+                                                   "The employee cannot vote for himself");
+
+        public static Error AlteadyVote = new(
+                                                 "Employee.Vote",
+                                                 "The employee is already vote");
+
     }
 }
