@@ -52,5 +52,13 @@ namespace GiftVote.Presentation.Controllers
 
             return Ok(result.IsSuccess);
         }
+
+        [HttpGet(nameof(GetBallotResult))]
+        public async Task<IActionResult> GetBallotResult(int ballotId, CancellationToken cancellationToken)
+        {
+            var result = await ballotService.GetBallotResult(ballotId, cancellationToken);
+
+            return Ok(result.Value);
+        }
     }
 }

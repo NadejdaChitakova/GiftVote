@@ -10,6 +10,7 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { VoteRequest } from '../../models/voteRequest';
 import { BallotService } from '../../services/ballot.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employee-table',
@@ -32,7 +33,8 @@ export class EmployeeTableComponent {
   constructor(
     private employeeService: EmployeeService,
     private ballotService: BallotService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
   ){}
 
   ngOnInit() {
@@ -49,5 +51,7 @@ export class EmployeeTableComponent {
 
   StartBallot(employeeId: number){
     this.ballotService.startBallot(employeeId).subscribe();
+
+    this.router.navigate(["/landingPage"])
   }
 }

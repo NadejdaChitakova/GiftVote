@@ -1,0 +1,33 @@
+
+<div class="card flex justify-content-center">
+  <p-button (onClick)="showDialog()" label="Get results from ballot" />
+  <p-dialog
+      header="Header"
+      [(visible)]="isResultDialogVisible"
+      [modal]="true"
+      [style]="{ width: '30%', height: 'auto' }">
+          <ng-template pTemplate="header">
+              <div class="inline-flex align-items-center justify-content-center gap-2">
+                  <span class="font-bold white-space-nowrap">
+                     Results from ballot
+                  </span>
+              </div>
+          </ng-template>
+          <ng-template pTemplate="content">
+            <div>
+
+              <span class="p-text-secondary block mb-5">Choosed birthday gift: {{ballotResponse.gift}}</span>
+              <li *ngFor="let vote of ballotResponse.employeeVotes; index as i; first as isFirst">
+                {{vote.employeeFullName}} - {{vote.employeeGiftVote }}
+              </li>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="footer">
+              <p-button
+                  label="Cancel"
+                  [text]="true"
+                  severity="secondary"
+                  (onClick)="isResultDialogVisible = false" />
+          </ng-template>
+  </p-dialog>
+</div>

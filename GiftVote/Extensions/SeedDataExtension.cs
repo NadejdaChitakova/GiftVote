@@ -10,31 +10,29 @@ namespace GiftVote.Data.Extensions
         public static void SeedData(this IApplicationBuilder app)
         {
             var faker = new Faker();
-            using (var context = new IdentityDbContext())
-            {
-                List<Gifts> gifts =
-                [
-                    Gifts.GiftFactory("Chocolate"),
-                    Gifts.GiftFactory("Perfume"),
-                    Gifts.GiftFactory("Jewel")
-                ];
+            using var context = new IdentityDbContext();
+            List<Gifts> gifts =
+            [
+                new Gifts("Chocolate"),
+                new Gifts("Perfume"),
+                new Gifts("Jewel")
+            ];
 
-                List<Employee> employees =
-                [
-Employee.EmployeeFactory(faker.Person.FirstName, faker.Person.LastName, faker.Person.UserName),
-Employee.EmployeeFactory(faker.Person.FirstName, faker.Person.LastName, faker.Person.UserName),
-Employee.EmployeeFactory(faker.Person.FirstName, faker.Person.LastName, faker.Person.UserName),
-Employee.EmployeeFactory(faker.Person.FirstName, faker.Person.LastName, faker.Person.UserName)
-                ];
+            List<Employee> employees =
+            [
+                new Employee(faker.Person.FirstName, faker.Person.LastName, faker.Person.UserName, faker.Person.DateOfBirth),
+                new Employee(faker.Person.FirstName, faker.Person.LastName, faker.Person.UserName, faker.Person.DateOfBirth),
+                new Employee(faker.Person.FirstName, faker.Person.LastName, faker.Person.UserName, faker.Person.DateOfBirth),
+                new Employee(faker.Person.FirstName, faker.Person.LastName, faker.Person.UserName, faker.Person.DateOfBirth)
+            ];
 
-                context.Set<Gifts>()
-                    .AddRange(gifts);
+            context.Set<Gifts>()
+                .AddRange(gifts);
 
-                context.Set<Employee>()
-                    .AddRange(employees);
+            context.Set<Employee>()
+                .AddRange(employees);
 
-                context.SaveChanges();
-            }
+            context.SaveChanges();
         }
     }
     }

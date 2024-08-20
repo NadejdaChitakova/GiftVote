@@ -4,6 +4,7 @@ using GiftVote.BLL.Models;
 using GiftVote.BLL.Models.Abstractions;
 using GiftVote.BLL.Models.Request;
 using GiftVote.BLL.Models.Response;
+using GiftVote.Data.Models;
 using GiftVote.Data.Repositories.Contracts;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +13,7 @@ namespace GiftVote.BLL.Services
     public sealed class BallotService(
         IBallotRepository repository,
         IVoteRepository voteRepository,
+        IEmployeeRepository employeeRepository,
         IMapper mapper) : IBallotService
     {
         public async Task<Result> StartBallotForUser(int id, int loggedUserId, CancellationToken cancellationToken)
@@ -28,7 +30,7 @@ namespace GiftVote.BLL.Services
                 return Result.Failure(EmployeeErrors.BallotAlreadyExistForUser);
             }
 
-            var ballot = Data.Models.Ballot.CreateBallot(
+            var ballot = new Ballot(
                                                          DateTime.Now, 
                                                          null,
                                                          loggedUserId,
@@ -66,7 +68,19 @@ namespace GiftVote.BLL.Services
         {
             var selectedGift = voteRepository.GetWinningGift(ballotId);
 
+            var query = employeeRepository.GetEmployees(ballotId);
 
+            var result =
+                await mapper.ProjectTo<EmployeeVote>(query, new Dictionary<string, object>() { ["ballotId"] = ballotId })
+                    .ToListAsync(cancellationToken);
+
+            BallotStatisticResponse response = new()
+            {
+Gift = selectedGift,
+EmployeeVotes = result
+            };
+
+            return response;
         }
     }
 }

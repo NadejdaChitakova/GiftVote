@@ -13,9 +13,12 @@ namespace GiftVote.Data.Repositories
             var ballot = await context.Set<Ballot>()
                 .FindAsync(ballotId, cancellationToken);
 
-            ballot.EndTime = DateTime.Now;
+            if (ballot is not null)
+            {
+                ballot.EndTime = DateTime.Now;
 
-            var isSuccess = await context.SaveChangesAsync(cancellationToken);
+                var isSuccess = await context.SaveChangesAsync(cancellationToken);
+            }
 
         }
 

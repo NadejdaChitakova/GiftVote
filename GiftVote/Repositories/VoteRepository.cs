@@ -21,8 +21,10 @@ namespace GiftVote.Data.Repositories
 
         public string? GetWinningGift(int ballotId)
 =>  context.Set<Vote>()
-                .Where(x => x.Id == ballotId)
-                .Select(x=> x.Gift.Name)
+                .Where(x => x.BallotId == ballotId)
+                .Select(x => x.Gift.Name)
+                .AsEnumerable()
                 .Max();
+
     }
 }

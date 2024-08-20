@@ -1,8 +1,9 @@
+import { StopBallotRequest } from './../models/stopBallotRequest';
 import { EmployeeBallot } from './../models/getEmployeeBallots';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { StopBallotRequest } from '../models/stopBallotRequest';
+import { BallotStatisticResponse } from '../models/statisticResult';
 
 @Injectable({
   providedIn: 'root'
@@ -26,8 +27,15 @@ export class BallotService {
   }
 
   stopBallot(request: StopBallotRequest) : Observable<any>{
+    console.log(request + "ballot")
     const ballotUrl = this.url + "StopBallot";
 
     return this.http.post<any>(ballotUrl, request);
+  }
+
+  getBallotResult(ballotId: number) : Observable<BallotStatisticResponse>{
+    const ballotUrl = this.url+ "GetBallotResult" + "?ballotId=" + ballotId;
+
+    return this.http.get<BallotStatisticResponse>(ballotUrl);
   }
 }

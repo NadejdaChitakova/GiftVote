@@ -5,7 +5,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GiftVote.Data.Repositories
 {
-    internal sealed class EmployeeRepository(IdentityDbContext context) : IEmployeeRepository
+    internal sealed class EmployeeRepository(
+        IdentityDbContext context) : IEmployeeRepository
     {
         public async Task<Employee?> FindByIdAsync(int id, CancellationToken cancellationToken)
         {
@@ -43,6 +44,11 @@ namespace GiftVote.Data.Repositories
         {
             return context.Set<Employee>()
                 .Where(x => x.Id != loggedUserId);
+        }
+
+        public IQueryable<Employee> GetEmployees(int ballotId)
+        {
+            return context.Set<Employee>();
         }
     }
 }

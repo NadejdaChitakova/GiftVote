@@ -13,19 +13,18 @@
           <tr>
               <td>{{ ballot.giftReceiverName }}</td>
               <td>
-                <!-- <button *ngIf="!employeeBallot.isUserVote"
-                    type="button"
-                    pButton
-                    pRipple
-                    icon="pi pi-plus"
-                    label="Vote"
-                    (click)="OpenVoteDialog()">
-                </button> -->
+
                 <div *ngIf="!ballot.isUserVote">
                   <app-gift-dialog [isVisible] = "isDialogVisible" [ballot]="ballot"></app-gift-dialog>
                 </div>
-                <p-button *ngIf="ballot.isCurrentUserCanStopBallot"
-                label="Stop ballot" severity="danger" />
+
+                <p-button *ngIf="ballot.isCurrentUserCanStopBallot && !ballot.endTime"
+                label="Stop ballot" (onClick)="StopBallot(ballot.id, ballot.giftReceiverId)" severity="danger" />
+
+                <div *ngIf="ballot.endTime">
+                  <app-statistic-dialog [isResultDialogVisible] = "isResultDialogVisible" [ballotId]="ballot.id"></app-statistic-dialog>
+                </div>
+
               </td>
           </tr>
       </ng-template>

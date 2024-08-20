@@ -28,7 +28,7 @@ namespace GiftVote.Data.Context
 
             string? connectionString = _configuration["ConnectionStrings:Database"];
 
-            optionsBuilder.UseSqlServer(connectionString);
+            optionsBuilder.UseSqlServer("Server=localhost,1433;Database=giftVote; user id=sa; password=Na!12345678;  TrustServerCertificate=True;");
         }
     }
 }

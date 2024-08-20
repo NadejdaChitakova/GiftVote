@@ -5,6 +5,7 @@
       <ng-template pTemplate="header">
           <tr>
               <th>Name</th>
+              <th>Birthday date</th>
               <th>Action</th>
               <th style="width: 5rem"></th>
           </tr>
@@ -12,6 +13,7 @@
       <ng-template pTemplate="body" let-employee>
           <tr>
               <td>{{ employee.fullName }}</td>
+              <td>{{ employee.birthDay}}</td>
               <td>
                   <button *ngIf="!employee.hasActualBallot"
                       type="button"
